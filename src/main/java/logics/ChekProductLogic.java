@@ -54,7 +54,7 @@ public class ChekProductLogic {
 
     private void read(Session session){
         System.out.println("1.С фильтром");
-        System.out.println("2Без фильтра");
+        System.out.println("2.Без фильтра");
         System.out.print(">");
         Scanner scanner = new Scanner(System.in);
         int i = scanner.nextInt();

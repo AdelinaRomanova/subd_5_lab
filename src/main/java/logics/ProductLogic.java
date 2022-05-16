@@ -43,6 +43,7 @@ public class ProductLogic {
         System.out.print("Введите ID фабрики:");
         int fabric_id = scanner.nextInt();
         System.out.print("Введите название продукта:");
+        scanner.nextLine();
         String product_name = scanner.nextLine();
         System.out.print("Введите цену:");
         int price = scanner.nextInt();
@@ -64,7 +65,7 @@ public class ProductLogic {
 
     private void read(Session session){
         System.out.println("1.С фильтром");
-        System.out.println("2Без фильтра");
+        System.out.println("2.Без фильтра");
         System.out.print(">");
         Scanner scanner = new Scanner(System.in);
         int i = scanner.nextInt();

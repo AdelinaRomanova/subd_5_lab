@@ -53,7 +53,7 @@ public class ChekLogic {
 
     private void read(Session session){
         System.out.println("1.С фильтром");
-        System.out.println("2Без фильтра");
+        System.out.println("2.Без фильтра");
         System.out.print(">");
         Scanner scanner = new Scanner(System.in);
         int i = scanner.nextInt();
@@ -63,7 +63,7 @@ public class ChekLogic {
                 List<Chek> chekList = session.createQuery("SELECT c FROM Chek c",
                         Chek.class).getResultList();
                 System.out.println("Чек");
-                System.out.printf("%-30s%-30s%-30s\n","ID","ID продавца","Дата");
+                System.out.printf("%-15s%-15s%-15s\n","ID","ID продавца","Дата");
                 chekList.forEach(System.out::println);
             }
             default -> System.out.println("Неверный ввод");
@@ -74,17 +74,41 @@ public class ChekLogic {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите ID чека:");
         int chek_id = scanner.nextInt();
-        System.out.println("Введите дату:");
-        scanner.nextLine();
-        String newDate = scanner.next();
-        Date date = java.sql.Date.valueOf(newDate);
-        try {
-            Chek chek = session.get(Chek.class, chek_id);
-            chek.setDate(date);
-            session.save(chek);
-        }
-        catch (Exception ex){
-            System.out.println("Этой записи не существует");
+        System.out.println("Что вы хотите обновить?");
+        System.out.println("1.ID продавца");
+        System.out.println("2.Дату");
+        System.out.print(">");
+        int i = scanner.nextInt();
+        switch (i) {
+            case 1 -> {
+                System.out.print("Введите ID продавца:");
+                scanner.nextLine();
+                int seller_id = scanner.nextInt();
+                try {
+                    Chek check = session.get(Chek.class, chek_id);
+                    check.setSeller(session.get(Seller.class,seller_id));
+                    session.save(check);
+                }
+                catch (Exception ex){
+                    System.out.println("Этой записи не существует");
+                }
+            }
+            case 2 -> {
+                System.out.print("Введите дату:");
+                scanner.nextLine();
+                scanner.nextLine();
+                String newDate = scanner.next();
+                Date date = java.sql.Date.valueOf(newDate);
+                try {
+                    Chek check = session.get(Chek.class, chek_id);
+                    check.setDate(date);
+                    session.save(check);
+                }
+                catch (Exception ex){
+                    System.out.println("Этой записи не существует");
+                }
+            }
+            default -> System.out.println("Неверный ввод");
         }
     }
 

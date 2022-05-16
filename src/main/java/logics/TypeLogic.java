@@ -50,7 +50,7 @@ public class TypeLogic {
 
     private void read(Session session){
         System.out.println("1.С фильтром");
-        System.out.println("2Без фильтра");
+        System.out.println("2.Без фильтра");
         System.out.print(">");
         Scanner scanner = new Scanner(System.in);
         int i = scanner.nextInt();
@@ -60,7 +60,7 @@ public class TypeLogic {
                 List<Type> typeList = session.createQuery("SELECT t FROM Type t",
                         Type.class).getResultList();
                 System.out.println("Тип обвуви");
-                System.out.printf("%-15s%s\n","type_id","type_name");
+                System.out.printf("%-15s%s\n","ID","Название");
                 typeList.forEach(System.out::println);
             }
             default -> System.out.println("Неверный ввод");
