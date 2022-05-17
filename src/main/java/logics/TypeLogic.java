@@ -1,5 +1,6 @@
 package logics;
 
+import entities.Product;
 import entities.Type;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
